@@ -1,0 +1,79 @@
+<section class="invoice-section">
+
+  <div class="container">
+    <!-- Main Content -->
+    <div class="main-content">
+      <header class="row justify-between sticky items-center">
+        <div class="invoice-title">
+          <h1>Invoices</h1>
+          <p>There are {{ filteredInvoices.length }} total invoices</p>
+        </div>
+        
+        <div class="header-actions filter row items-center">
+        <div class="filter-container">
+          <div class="text" (click)="toggleFilter()">
+            <span>filter by status</span>
+          <div class="filter-icon">></div>
+          </div>
+ <div class="filter-options">
+   <label *ngFor="let status of statuses" class="filter-option">
+    <input
+      type="checkbox"
+      [value]="status.value"
+      (change)="onCheckboxChange(status.value, $event)"
+      [checked]="selectedStatuses.includes(status.value)"
+    />
+    {{ status.label }}
+  </label>
+ </div>
+</div>
+
+          
+          <button [routerLink]="['/invoices', 'new']" class="new-invoice">
+            <div class="btn-image">
+            <img  src="../../../assets/icon-plus.svg" alt="">
+
+            </div>
+            <span>New <small>Invoice</small></span>
+
+
+          </button>
+        </div>
+      </header>
+      
+      <!-- Invoice List -->
+         <div class="invoice-container">
+
+  
+  <a class="grid-list" *ngFor="let invoice of filteredInvoices"
+        [appHighlightOverdue]="invoice.paymentDue" [routerLink]="['/invoices', invoice.id]">
+          
+        <p class="invoice-id"><span class="invoice-number">#</span>{{ invoice.id }}</p>
+        <p class="createdAt">{{ invoice.createdAt }}</p>
+        <p><span>Due</span>  {{ invoice.paymentDue }}</p>
+        <p>{{ invoice.clientName }}</p>
+         
+                  <span class="item-price">{{ invoice.items[0].price | currency:'USD':'symbol':'1.2-2' }}</span>
+
+       <p [ngClass]="{
+  'status-pending': invoice.status === 'pending',
+  'status-paid': invoice.status === 'paid',
+  'status-draft': invoice.status === 'draft'
+}">
+  {{ invoice.status }}
+</p>
+
+  <a ><span class="arrow">></span></a>
+</a>
+
+         </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<app-new-invoice-form
+*ngIf="isNewModalOpen"
+(close)="closeModal()">
+</app-new-invoice-form>
+
+</section>

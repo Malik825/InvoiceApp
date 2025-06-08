@@ -1,0 +1,124 @@
+<div class="invoice-container" *ngIf="invoice">
+  <div class="back-button"> <a [routerLink]="['/invoices']" class="back">‹ Back to Invoices</a></div>
+  
+  <div class="status-bar">
+    <div class="status-left">
+      <span class="status-label">Status</span>
+      <span class="pending-badge">● {{ invoice.status }}</span>
+    </div>
+    <div class="actions">
+      <button class="btn btn-edit" [routerLink]="['/invoices', invoice.id, 'edit']">Edit</button>
+
+      <button class="btn btn-delete">Delete</button>
+      <button class="btn btn-paid" (click)="markAsPaid()">Mark as Paid</button>
+    </div>
+  </div>
+
+  <div class="invoice-card">
+    <div class="company-address">
+        <div class="invoice-info">
+        <div class="invoice-number">{{ invoice.id }}</div>
+        <div class="service-type">Graphic Design</div>
+      </div>
+      <div class="address-text">
+        {{ invoice.senderAddress.street }}<br>
+        {{ invoice.senderAddress.city }}<br>
+        E1 3EZ<br>
+        United Kingdom
+      </div>
+    </div>
+
+    <div class="invoice-header">
+      <div class="invoice-info">
+        <div class="invoice-number">{{ invoice.id }}</div>
+        <div class="service-type">Graphic Design</div>
+      </div>
+
+      <div class="dates-section">
+        <div class="date-group">
+          <div class="date-label">Invoice Date</div>
+          <div class="date-value">{{ invoice.createdAt }}</div>
+        </div>
+        <div class="date-group">
+          <div class="date-label">Payment Due</div>
+          <div class="date-value">{{ invoice.paymentDue }}</div>
+        </div>
+      </div>
+
+      <div class="bill-to-section">
+        <div class="section-label">Bill To</div>
+        <div class="client-name">{{ invoice.clientName }}</div>
+        <div class="client-address">
+          {{ invoice.clientAddress.street }}<br>
+          {{ invoice.clientAddress.city }}<br>
+          BD1 9PB<br>
+          United Kingdom
+        </div>
+      </div>
+    </div>
+
+    <div class="sent-to-section">
+      <div class="section-label">Sent to</div>
+      <div class="email-address">{{ invoice.clientEmail }}</div>
+    </div>
+
+    <div class="items-section">
+      <div class="items-header">
+        <div class="item-name-header">Item Name</div>
+        <div class="qty-header">QTY.</div>
+        <div class="price-header">Price</div>
+        <div class="total-header">Total</div>
+      </div>
+      
+      <div class="items-list">
+        <div class="item-row" *ngFor="let item of invoice.items">
+          <div class="item-name">{{ item.name }}</div>
+          <div class="item-qty">{{ item.quantity }}</div>
+          <div class="item-price">£ {{ item.price | currency }}</div>
+          <div class="item-total">£ {{ invoice.total | currency }}</div>
+        </div>
+        
+        
+      </div>
+    </div>
+
+    <div class="amount-due">
+      <span class="amount-label">Amount Due</span>
+      <span class="amount-value">{{ invoice.paymentDue }}</span>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="isEditModalOpen">
+  <router-outlet name="modal"></router-outlet>
+</div>
+<!-- <div *ngIf="invoice">
+  <h2>Invoice {{ invoice.id }}</h2>
+  <p>Status: {{ invoice.status }}</p>
+  <p><strong>Client:</strong> {{ invoice.clientName }} ({{ invoice.clientEmail }})</p>
+
+  <h3>Sender Address</h3>
+  <p>{{ invoice.senderAddress.street }}, {{ invoice.senderAddress.city }}</p>
+
+  <h3>Client Address</h3>
+  <p>{{ invoice.clientAddress.street }}, {{ invoice.clientAddress.city }}</p>
+
+  <h3>Description</h3>
+  <p>{{ invoice.description }}</p>
+
+  <h3>Dates</h3>
+  <p>Created At: {{ invoice.createdAt }}</p>
+  <p>Payment Due: {{ invoice.paymentDue }}</p>
+
+  <h3>Items</h3>
+  <ul>
+    <li *ngFor="let item of invoice.items">
+      {{ item.name }} - {{ item.quantity }} x {{ item.price | currency }} = {{ item.total | currency }}
+    </li>
+  </ul>
+
+  <h3>Total: {{ invoice.total | currency }}</h3>
+
+  <button [routerLink]="['/invoices', invoice.id, 'edit']">Edit Invoice</button>
+  <button (click)="markAsPaid()">Mark as Paid</button>
+</div> -->

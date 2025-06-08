@@ -1,0 +1,392 @@
+@use '../../partials/variables' as *;
+h2 {
+  margin-top: 0;
+}
+
+button {
+  margin-right: 1rem;
+  margin-top: 1rem;
+}
+
+
+.invoice-container {
+  max-width: 800px;
+  margin: 0 auto;
+ position: relative;
+  z-index: 1;
+  @media (max-width: 768px) {
+    margin-top: 5rem;
+    padding-bottom: 0rem;
+    
+  }
+  .back-button {
+    color: #8b5cf6;
+    font-size: 14px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+  }
+
+  .status-bar {
+    background: var(--color-surface);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // color: white;
+
+    .status-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      @media (max-width:800px) {
+        justify-content: space-between !important;
+      }
+      .status-label {
+        font-size: 16px;
+        color: #a0a0a0;
+      }
+
+      .pending-badge {
+        background: #ff6b35;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      @media (max-width:600px) {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 200;
+        width: 100%;
+        background: var(--color-surface);
+        padding: 20px;
+        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        .btn{
+          padding: .5rem .8rem;
+          height: 40px;
+        }
+      }
+      .btn {
+        padding: 10px 20px;
+        border-radius: 25px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s;
+
+        &.btn-edit {
+          background: transparent;
+          // color: white;
+          border: 1px solid #4a5568;
+
+          &:hover {
+            background: #4a5568;
+          }
+        }
+
+        &.btn-delete {
+          background: #e53e3e;
+          color: white;
+
+          &:hover {
+            background: #c53030;
+          }
+        }
+
+        &.btn-paid {
+          background: #8b5cf6;
+          color: white;
+
+          &:hover {
+            background: #7c3aed;
+          }
+        }
+      }
+    }
+  }
+
+  .invoice-card {
+    background: var(--color-surface);
+    border-radius: 12px;
+    padding: 30px;
+    color: $clr-black;
+    position: relative;
+    height: auto !important;
+margin-bottom: 4rem;
+
+@media (max-width:768px) {
+  padding: 20px 50px !important;
+  margin-bottom: 10rem;
+}
+    .company-address {
+
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      text-align: right;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #a0a0a0;
+    }
+
+    .invoice-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+      margin-top: 60px;
+
+      .invoice-info {
+        .invoice-number {
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 8px;
+        }
+
+        .service-type {
+          color: #a0a0a0;
+          font-size: 14px;
+        }
+     
+      }
+
+      .dates-section {
+        .date-group {
+          margin-bottom: 20px;
+
+          .date-label {
+            color: #a0a0a0;
+            font-size: 14px;
+            margin-bottom: 8px;
+          }
+
+          .date-value {
+            font-size: 16px;
+            font-weight: 600;
+          }
+        }
+        @media (max-width:768px) {
+          display: flex;
+          justify-content: space-between;
+        
+        }
+      }
+
+      .bill-to-section {
+        .section-label {
+          color: #a0a0a0;
+          font-size: 14px;
+          margin-bottom: 12px;
+        }
+
+        .client-name {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 12px;
+        }
+
+        .client-address {
+          color: #a0a0a0;
+          font-size: 14px;
+          line-height: 1.5;
+        }
+      }
+    }
+
+    .sent-to-section {
+      margin-bottom: 40px;
+
+      .section-label {
+        color: var(--color-text);
+        font-size: 14px;
+        margin-bottom: 12px;
+      }
+
+      .email-address {
+        font-size: 16px;
+        font-weight: 600;
+      }
+    }
+
+    .items-section {
+      margin-bottom: 30px;
+
+      .items-header {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 20px;
+        padding: 20px;
+        background: var(--color-bg);
+        border-radius: 8px 8px 0 0;
+        font-size: 14px;
+        color: var(--color-text);
+        font-weight: 600;
+      }
+
+      .items-list {
+        background: var(--color-bg);
+        border-radius: 0 0 8px 8px;
+
+        .item-row {
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr 1fr;
+          gap: 20px;
+          padding: 20px;
+          border-bottom: 1px solid #4a5568;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          .item-name {
+            font-weight: 600;
+          }
+
+          .item-qty, .item-price, .item-total {
+            text-align: right;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .amount-due {
+      background: #1a202c;
+      padding: 15px;
+      border-radius: 0 0 10px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      @media (max-width:600px) {
+       margin-top: -2rem;
+      }
+
+      .amount-label {
+        color: $clr-gray;
+        font-size: 16px;
+      }
+
+      .amount-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+      }
+    }
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    padding: 0 15px;
+
+    .status-bar {
+      flex-direction: column;
+      gap: 15px;
+      align-items: stretch;
+
+      .status-left {
+        justify-content: center;
+      }
+
+      .actions {
+        justify-content: center;
+        flex-wrap: wrap;
+
+        .btn {
+          flex: 1;
+          min-width: 80px;
+        }
+      }
+    }
+
+    .invoice-card {
+      padding: 20px;
+
+      .company-address {
+        position: static;
+        text-align: left;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        .invoice-info{
+          display: none;
+          @media  (max-width: 600px) {
+            display: block;
+            margin-bottom: 2rem;
+          }
+        }
+      }
+
+      .invoice-header {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        margin-top: 0;
+      }
+
+      .items-section {
+        .items-header {
+          display: none;
+        }
+
+        .items-list {
+          background: $clr-light;
+          .item-row {
+            grid-template-columns: 1fr;
+            gap: 8px;
+            padding: 15px;
+            
+            .item-name {
+              font-size: 16px;
+              margin-bottom: 10px;
+            }
+
+            .item-qty, .item-price, .item-total {
+              text-align: left;
+              display: flex;
+              justify-content: space-between;
+              
+              &::before {
+                color: #a0a0a0;
+                font-weight: normal;
+              }
+            }
+
+            .item-qty::before {
+              content: "QTY: ";
+            }
+
+            .item-price::before {
+              content: "Price: ";
+            }
+
+            .item-total::before {
+              content: "Total: ";
+            }
+          }
+        }
+      }
+
+      .amount-due {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+
+        .amount-value {
+          font-size: 28px;
+        }
+      }
+    }
+  }
+}

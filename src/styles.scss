@@ -1,0 +1,191 @@
+@use './app/partials/variables' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+list-style: none;
+outline: none;
+border: none;
+text-decoration: none;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f0f0f0 ;
+  color: $clr-black;
+  overflow-x: hidden;
+  font-size: 12px;
+}
+body.dark-theme{
+    background:  #141625;
+}
+img{
+    max-width: 100%;
+}
+i, input, textarea, button {
+  font-family: 'Poppins', sans-serif;
+}
+.container{
+    width: 1240px;
+    max-width: 65%;
+    margin: 0 auto 0 20% !important;
+    .row{
+        display: flex;
+        &.items-center{
+            align-items: center;
+        }
+        &.justify-between{
+            justify-content: space-between;
+        }
+    }
+    @media (max-width: 800px) {
+      max-width: 95%;
+      
+
+    }
+    @media (max-width: 672px) {
+      width: 95%;
+      
+
+    }
+
+
+}
+/* Modal Overlay Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.edit-modal {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.form-container{
+  background:#f0f0f0
+}
+body.dark-theme{
+  .form-container{
+    background: #141625;
+  }
+}
+.form-container input,
+.form-container textarea,
+.form-container select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: var(--color-surface);
+  &::placeholder{
+    color: var(--color-text);
+  }
+}
+body.dark-theme{
+  .form-container input,
+  .form-container textarea,
+  .form-container select {
+    background: var(--form-container-bg);
+    border: none !important;
+    color: #fff;
+  }
+}
+.grid-list{
+  background: #fff !important;
+}
+body.dark-theme{
+  .grid-list{
+    background: var(--color-surface) !important;
+  }
+}
+.add-item{
+  width: 100%;
+  flex: 100%;
+  margin:2rem 0 1rem;
+  font-size: 1rem;
+  letter-spacing: 1.2px;
+  background: #ddd;
+  padding: 0.45rem 1.2rem;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.button-group{
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+width: calc(100% + 20%);
+margin-left: -10%;
+margin-bottom: -10%;
+background: #fff;
+padding: 2rem 3rem;
+  button{
+    padding: .5rem 1rem;
+    border-radius: 999px;
+    
+  }
+  .btn-main{
+    flex: 70%;
+    display: flex;
+    // justify-content: space-between;
+    button{
+      color: #fff;
+      border: 1px solid $clr-primary;
+      &:nth-child(1){
+        background:#ddd;
+        color: #000;
+        border: 1px solid #ddd;
+      }
+      &:nth-child(2){
+        background: $clr-black;
+        color: $clr-gray;
+        align-self: flex-end;
+      }
+
+    }
+  }
+  .btn-change{
+    button{
+      background: $clr-primary;
+      color: #fff;
+      border: 1px solid $clr-primary;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+
+<div class="edit-page">
+  <app-invoice-details *ngIf="invoiceData" [invoice]="invoiceData"></app-invoice-details>
+  
+</div>
+<div>
+  <h2>Edit Invoice</h2>
+
+  <app-new-invoice-form
+  *ngIf="invoiceData"
+  [formData]="invoiceData"
+  [isEditMode]="true"
+  (close)="onClose()">
+  
+</app-new-invoice-form>
+</div>
+
