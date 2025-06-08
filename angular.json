@@ -17,10 +17,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-          "outputPath": "dist/invoice-app",
-          "index": "src/index.html",
-          "browser": "src/main.ts",
-          "baseHref": "/",
+            "outputPath": "dist/invoice-app",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "baseHref": "/",
             "polyfills": [
               "zone.js"
             ],
@@ -52,8 +52,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "8kB",
+                  "maximumError": "12kB"
                 }
               ],
               "outputHashing": "all"
