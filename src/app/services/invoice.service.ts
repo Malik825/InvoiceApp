@@ -14,8 +14,20 @@ export class InvoiceService {
   constructor(private http: HttpClient) {}
 
 getInvoices(): Observable<Invoice[]> {
-  const localData = this.getStoredInvoices(); // 🔁 Always read fresh from storage
-  return of(localData);
+  const localData = this.getStoredInvoices();
+  if (localData.length > 0) {
+    // Return invoices from localStorage
+    return of(localData);
+  } else {
+    // If empty, load from JSON file then save to localStorage
+    return this.http.get<Invoice[]>(this.dataUrl).pipe(
+      tap(data => this.saveInvoices(data)),
+      catchError(err => {
+        console.error('Failed to load invoices from JSON', err);
+        return of([]); // Return empty array on error
+      })
+    );
+  }
 }
 
 
