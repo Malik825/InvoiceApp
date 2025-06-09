@@ -10,23 +10,25 @@
         </div>
         
         <div class="header-actions filter row items-center">
-        <div class="filter-container">
-          <div class="text" (click)="toggleFilter()">
-            <span>filter by status</span>
-          <div class="filter-icon">></div>
-          </div>
- <div class="filter-options">
-   <label *ngFor="let status of statuses" class="filter-option">
-    <input
-      type="checkbox"
-      [value]="status.value"
-      (change)="onCheckboxChange(status.value, $event)"
-      [checked]="selectedStatuses.includes(status.value)"
-    />
-    {{ status.label }}
-  </label>
- </div>
+  <div class="filter-container">
+  <div class="text" (click)="toggleFilter()">
+    <span>Filter by status</span>
+    <div class="filter-icon" [class.open]="isFilterOpen">&#8250;</div>
+  </div>
+
+  <div class="filter-options" *ngIf="isFilterOpen">
+    <label *ngFor="let status of statuses" class="filter-option">
+      <input
+        type="checkbox"
+        [value]="status.value"
+        (change)="onCheckboxChange(status.value, $event)"
+        [checked]="selectedStatuses.includes(status.value)"
+      />
+      {{ status.label }}
+    </label>
+  </div>
 </div>
+
 
           
           <button [routerLink]="['/invoices', 'new']" class="new-invoice">
